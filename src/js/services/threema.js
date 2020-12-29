@@ -9,6 +9,7 @@ module.exports = function(shariff) {
     popup: false,
     shareText: {
       'bg': 'cподеляне',
+      'cs': 'sdílet',
       'da': 'del',
       'de': 'teilen',
       'en': 'share',
@@ -34,9 +35,11 @@ module.exports = function(shariff) {
       'zh': '分享'
     },
     name: 'threema',
+    faPrefix: 'fas',
     faName: 'fa-lock',
     title: {
       'bg': 'Сподели в Threema',
+      'cs': 'Sdílet na Threema',
       'da': 'Del på Threema',
       'de': 'Bei Threema teilen',
       'en': 'Share on Threema',

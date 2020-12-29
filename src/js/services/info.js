@@ -6,9 +6,11 @@ module.exports = function(shariff) {
     popup: shariff.getInfoDisplayPopup(),
     shareText: 'Info',
     name: 'info',
+    faPrefix: 'fas',
     faName: 'fa-info',
     title: {
       'bg': 'Повече информация',
+      'cs': 'Více informací',
       'da': 'Flere oplysninger',
       'de': 'Weitere Informationen',
       'en': 'More information',

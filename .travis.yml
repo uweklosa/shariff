@@ -14,6 +14,10 @@ env:
   global:
     - BASE_NAME=shariff-$TRAVIS_TAG
 
+cache:
+  directories:
+    - node_modules
+
 script:
   - npm run test
 
@@ -24,7 +28,7 @@ before_deploy:
 deploy:
   - provider: releases
     api_key:
-      secure: "QK+97CEzaL5FwA09hs7II9PnBKn1KRUUOLtmGnIw83FiqI5dUtAfPxe0WuA9dwIVX9FKOtPacn5nSoPb0LVvWwdTxGN2DOnYrUW8pIsPGng1Z5kbD2feJdTIeXkVmKb8JYssq76L7O6SyXQbkrbYq6KmrjFH9bEEpGlcUOyKY+k="
+      secure: "OL2jzThEtg8cqPK/yyBncO5Tp3pypNV+Sh5H91TxbtdRfGF/POod3bsTRBojKWQh0C0VcxfvWyQnA0+2ZXOM5TX0ktfJbPnuIPY1RKBjprg50Gqz04aKJnlGo7SFWj/aKVoPZ9HOHRHFXAvdzZPo66SUPPXVBtb56Zp4yrcvOsY="
     file:
       - $BASE_NAME.zip
       - $BASE_NAME.tar.gz
@@ -35,7 +39,7 @@ deploy:
   - provider: npm
     email: npmjs@heise.de
     api_key:
-      secure: "TukgzT1vc1Sli1cKVdVHdEen/89NqBDMgjSFe3iDr/oTulYE7sqR1JkdxX2M5lnCC53DqRnUK0mUs4mrWcZmHF+Q1ocVSuHDOi30iBvHQgV2SigV0Ufq3xwDG+yS4R7kPLEWlUVzn8kb6IXR+WC/QmkHWNRX6mkCnH0RjrqCja4="
+      secure: eNX4D2s8TLojBXYg3vCjiUpE+N4dgZlXVbI1eriti1puOyWJ9tO4JxbwGiO0cShSJV+gjpzC9KpWqZCuTlY2ZZIhUfskfE179HDu+0rue4GAF2iQz2dvs8hoeWidLPIkXgn3YofsS1iQMX3VxJ1j3GVBwEg9motbcuIb4zbxKCw=
     skip_cleanup: true
     on:
       repo: heiseonline/shariff

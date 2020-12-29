@@ -5,7 +5,8 @@ var url = require('url')
 // abbreviate at last blank before length and add "\u2026" (horizontal ellipsis)
 var abbreviateText = function(text, length) {
   var div = document.createElement('div')
-  div.innerHTML = text
+  var node = document.createTextNode(text)
+  div.appendChild(node)
   var abbreviated = div.textContent
   if (abbreviated.length <= length) {
     return text
@@ -34,12 +35,18 @@ module.exports = function(shariff) {
     popup: true,
     shareText: {
       'en': 'tweet',
-      'zh': '分享'
+      'ja': 'のつぶやき',
+      'ko': '짹짹',
+      'ru': 'твит',
+      'sr': 'твеет',
+      'zh': '鸣叫'
     },
     name: 'twitter',
+    faPrefix: 'fab',
     faName: 'fa-twitter',
     title: {
       'bg': 'Сподели в Twitter',
+      'cs': 'Sdílet na Twiiteru',
       'da': 'Del på Twitter',
       'de': 'Bei Twitter teilen',
       'en': 'Share on Twitter',

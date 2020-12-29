@@ -6,6 +6,7 @@ module.exports = function(shariff) {
     popup: true,
     shareText: {
       'bg': 'cподеляне',
+      'cs': 'sdílet',
       'da': 'del',
       'de': 'teilen',
       'en': 'share',
@@ -31,9 +32,11 @@ module.exports = function(shariff) {
       'zh': '分享'
     },
     name: 'vk',
+    faPrefix: 'fab',
     faName: 'fa-vk',
     title: {
       'bg': 'Сподели във VK',
+      'cs': 'Sdílet na VKu',
       'da': 'Del på VK',
       'de': 'Bei VK teilen',
       'en': 'Share on VK',

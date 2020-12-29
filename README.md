@@ -5,23 +5,24 @@ Shariff enables website users to share their favorite content without compromisi
 
 ![Shariff Logo © 2015 Heise Medien](http://www.heise.de/icons/ho/shariff-logo.png)
 
-Facebook, Google+ and Twitter supply official sharing code snippets which quietly siphon personal data from all page visitors. Shariff enables visitors to see how popular your page is on Facebook and share your content with others without needless data leaks.
+Some social service providers like e.g. Facebook supply official sharing code snippets which quietly siphon personal data from all page visitors. Shariff enables visitors to see how popular your page is on Facebook and share your content with others without needless data leaks.
 
 Shariff `(/ˈʃɛɹɪf/)` is an open-source, low-maintenance, high-privacy solution maintained by German computer magazine c't and heise online.
 
-Shariff consists of two parts: a simple JavaScript client library and an optional server-side component. The latter fetches the number of likes and plus-ones. Share buttons and share counts work without a connection between your visitors' browsers and *social networks* (unless they decide to share, of course).
+Shariff consists of two parts: a simple JavaScript client library and an optional server-side component. The latter fetches the number of likes or shares. Share buttons and share counts work without a connection between your visitors' browsers and *social networks* (unless they decide to share, of course).
 
 ## Getting Started
 
 1. Download the [latest release](https://github.com/heiseonline/shariff/releases/latest)
-2. Include CSS in `<head>`:
-    * `build/shariff.complete.css` contains all dependencies
+2. Upload all files included in the release
+3. Include CSS in `<head>`:
+    * `shariff.complete.css` uses the dependencies included in the release files
     * if [Font Awesome](https://github.com/FortAwesome/Font-Awesome) is already included in your site, use `build/shariff.min.css`
-3. Include JavaScript right before `</body>`:
-    * `build/shariff.complete.js` contains all dependencies
+4. Include JavaScript right before `</body>`:
+    * `shariff.complete.js` uses the dependencies included in the release files
     * if [jQuery](https://github.com/jquery/jquery) is already included in your site, use `build/shariff.min.js`
-4. Insert one or more `<div class="shariff">` elements.
-5. Customize the look using data-* attributes.
+5. Insert one or more `<div class="shariff">` elements.
+6. Customize the look using data-* attributes.
 
 To enable the counters in the buttons, see section [Backends](#backends).
 
@@ -85,19 +86,20 @@ $ npm run dev
 
 | Attribute        | Description | Default |
 |------------------|-------------|---------|
-| `data-backend-url` | The path to your Shariff backend, see below. Settings the value to `null` disables the backend feature. No counts will occur.  | `null` |
+| `data-backend-url` | The path to your Shariff backend, see below. Setting the value to `null` disables the backend feature. No counts will occur.  | `null` |
+| `data-button-style` | How to display the buttons. Values: `standard`, `icon`, `icon-count`. With `icon` only the icon is shown, with `icon-count` icon and counter and with `standard` icon, text and counter are shown, depending on the display size.  | `standard` |
 | `data-flattr-category` | Category to be used for Flattr. | `null` |
 | `data-flattr-user` | User that receives Flattr donation. | `null` |
 | `data-info-url` | URL of the info page. | `http://ct.de/-2467514` |
 | `data-info-display` | How to display the info page. Values: `blank`, `popup`, `self`. | `blank` |
-| `data-lang`      | The localisation to use. Available: `bg`, `de`, `en`, `es`, `fi`, `hr`, `hu`, `ja`, `ko`, `no`, `pl`, `pt`, `ro`, `ru`, `sk`, `sl`, `sr`, `sv`, `tr`, `zh` | `de` |
+| `data-lang`      | The localisation to use. Available: `bg`, `cs`, `da`, `de`, `en`, `es`, `fi`, `fr`, `hr`, `hu`, `it`, `ja`, `ko`, `nl`, `no`, `pl`, `pt`, `ro`, `ru`, `sk`, `sl`, `sr`, `sv`, `tr`, `zh` | `de` |
 | `data-mail-body` | If a `mailto:` link is used in `data-mail-url`, then this value is used as the mail body. The body text should contain the placeholder `{url}` which will be replaced with the share URL. | see `data-url`  |
 | `data-mail-subject` | If a `mailto:` link is used in `data-mail-url`, then this value is used as the mail subject. | see `data-title` |
 | `data-mail-url`  | The url target used for the `mail` service button | `?view=mail` |
 | `data-media-url` | Media url to be shared (pinterest) | `null` |
 | `data-orientation` | `vertical` will stack the buttons vertically. | `horizontal`  |
 | `data-referrer-track` | A string that will be appended to the share url. Can be disabled using `null`. | `null` |
-| `data-services`   | An entity-encoded JSON string containing an array of service names to be enabled. Example: `data-services="[&quot;facebook&quot;,&quot;googleplus&quot;]"` Available service names: `twitter`, `facebook`, `googleplus`, `linkedin`, `pinterest`, `xing`, `whatsapp`, `mail`, `info`, `addthis`, `tumblr`, `flattr`, `diaspora`, `reddit`, `stumbleupon`, `threema`, `weibo`, `tencent-weibo`, `qzone`, `print`, `telegram`, `vk` | `twitter`, `facebook`, `googleplus`, `info` |
+| `data-services`   | An entity-encoded JSON string containing an array of service names to be enabled. Example: `data-services="[&quot;facebook&quot;,&quot;twitter&quot;]"` Available service names: `twitter`, `facebook`, `linkedin`, `pinterest`, `xing`, `whatsapp`, `mail`, `info`, `addthis`, `tumblr`, `flattr`, `diaspora`, `reddit`, `stumbleupon`, `threema`, `weibo`, `tencent-weibo`, `qzone`, `print`, `telegram`, `vk`, `flipboard`, `pocket`, `buffer` | `twitter`, `facebook`, `info` |
 | `data-theme`       | We include 3 color schemes, `standard`, `grey` and `white`. | `standard` |
 | `data-title`       | Title to be used as share text in Twitter/Whatsapp | page's `DC.title`/`DC.creator` or `<title>` |
 | `data-twitter-via` | Screen name of the user to attribute the Tweet to | `null` |
@@ -133,13 +135,15 @@ The current and previous major releases of Firefox, Google Chrome, Internet Expl
 Shariff supports the following social sharing services:
 
 - AddThis
+- buffer
 - diaspora*
 - facebook
 - Flattr
-- Google+
+- Flipboard
 - LinkedIn
 - Mail
 - Pinterest
+- Pocket
 - Print
 - Qzone
 - reddit
@@ -155,18 +159,17 @@ Shariff supports the following social sharing services:
 - XING
 
 In addition, the service `Info` provides a button to show an info page about the social sharing buttons.
-The URL of this page can be set with an option. Default value: `http://ct.de/-2467514`, i.e. the c't article introducing Shariff. 
+The URL of this page can be set with an option. Default value: `http://ct.de/-2467514`, i.e. the c't article introducing Shariff.
 
 ## Backends
 
-In order to display share counts with Shariff, you need one of the following backends:
+In order to display share counts with Shariff, you need the following backend:
 
-* [shariff-backend-node](http://github.com/heiseonline/shariff-backend-node)
-* [shariff-backend-perl](http://github.com/heiseonline/shariff-backend-perl)
 * [shariff-backend-php](http://github.com/heiseonline/shariff-backend-php)
 
 Third-party backends:
-* [shariff-backend-java](http://github.com/headissue/shariff-backend-java)
+
+* [shariff-backend-java](https://github.com/shred/shariff-backend-java)
 
 Once you have one of these backends up and running, insert its URL into the `data-backend-url` attribute. For example, if the backend runs under `http://example.com/my-shariff-backend/`, the `data-backend-url` should be `/my-shariff-backend/`. The script will handle the rest.
 
@@ -189,3 +192,4 @@ This is a list of integrations for third-party systems:
 * [WordPress Plugin Shariff Wrapper](https://wordpress.org/plugins/shariff/)
 * [Xenforo [ITM] ctSSB for Xenforo 1.5](https://github.com/McAtze/-ITM-ctShariffSocialButtons)
 * [Xenforo [WMTech] Social Share Privacy Plugin](https://wmtech.net/products/wmtech-social-share-privacy.41/)
+* [Magento 2 Shariff Social Share](https://www.jajuma.de/en/jajuma-develop/extensions/shariff-social-share-buttons-extension-for-magento-2)

@@ -6,6 +6,7 @@ module.exports = function(shariff) {
     popup: true,
     shareText: {
       'bg': 'cподеляне',
+      'cs': 'sdílet',
       'da': 'del',
       'de': 'teilen',
       'en': 'share',
@@ -31,9 +32,11 @@ module.exports = function(shariff) {
       'zh': '分享'
     },
     name: 'addthis',
+    faPrefix: 'fas',
     faName: 'fa-plus',
     title: {
       'bg': 'Сподели в AddThis',
+      'cs': 'Sdílet na AddThis',
       'da': 'Del på AddThis',
       'de': 'Bei AddThis teilen',
       'en': 'Share on AddThis',

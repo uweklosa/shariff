@@ -41,15 +41,16 @@ const Defaults = {
   // horizontal/vertical
   orientation: 'horizontal',
 
+  // icon/icon-count/standard
+  buttonStyle: 'standard',
+
   // a string to suffix current URL
   referrerTrack: null,
 
   // services to be enabled in the following order
-  services: ['twitter', 'facebook', 'googleplus', 'info'],
+  services: ['twitter', 'facebook', 'info'],
 
-  title: function() {
-    return $('head title').text()
-  },
+  title: global.document.title,
 
   twitterVia: null,
 
@@ -64,7 +65,11 @@ const Defaults = {
 
     if (canonical.length > 0) {
       if (canonical.indexOf('http') < 0) {
-        canonical = global.document.location.protocol + '//' + global.document.location.host + canonical
+        if (canonical.indexOf('//') !== 0) {
+          canonical = global.document.location.protocol + '//' + global.document.location.host + canonical
+        } else {
+          canonical = global.document.location.protocol + canonical
+        }
       }
       url = canonical
     }
@@ -94,7 +99,7 @@ class Shariff {
 
     this._addButtonList()
 
-    if (this.options.backendUrl !== null) {
+    if (this.options.backendUrl !== null && this.options.buttonStyle !== 'icon') {
       this.getShares(this._updateCounts.bind(this))
     }
   }
@@ -151,10 +156,11 @@ class Shariff {
   }
 
   getTitle() {
-    let title = this.getOption('title') || this.getMeta('DC.title')
+    let title = this.getOption('title')
+    if ($(this.element).data()['title']) return title
+    title = title || this.getMeta('DC.title')
     let creator = this.getMeta('DC.creator')
-    if (title && creator) title = `${title} - ${creator}`
-    return title
+    return (title && creator) ? `${title} - ${creator}` : title
   }
 
   getReferrerTrack() {
@@ -190,29 +196,40 @@ class Shariff {
     var $buttonList = $('<ul/>').addClass([
       'theme-' + this.options.theme,
       'orientation-' + this.options.orientation,
-      'col-' + this.options.services.length
+      'button-style-' + this.options.buttonStyle,
+      'shariff-col-' + this.options.services.length
     ].join(' '))
 
     // add html for service-links
     this.services.forEach(service => {
       var $li = $('<li/>').addClass(`shariff-button ${service.name}`)
-      var $shareText = $('<span/>')
-        .addClass('share_text')
-        .text(this.getLocalized(service, 'shareText'))
+      var $shareLink = $('<a/>').attr('href', service.shareUrl)
 
-      var $shareLink = $('<a/>')
-        .attr('href', service.shareUrl)
-        .append($shareText)
+      if (this.options.buttonStyle === 'standard') {
+        var $shareText = $('<span/>')
+          .addClass('share_text')
+          .text(this.getLocalized(service, 'shareText'))
+        $shareLink.append($shareText)
+      }
 
-      if (typeof service.faName !== 'undefined') {
-        $shareLink.prepend($('<span/>').addClass(`fa ${service.faName}`))
+      if (typeof service.faPrefix !== 'undefined' && typeof service.faName !== 'undefined') {
+        $shareLink.prepend($('<span/>').addClass(`${service.faPrefix} ${service.faName}`))
       }
 
       if (service.popup) {
         $shareLink.attr('data-rel', 'popup')
+        if (service.name !== 'info') {
+          $shareLink.attr('rel', 'nofollow')
+        }
       } else if (service.blank) {
         $shareLink.attr('target', '_blank')
-        $shareLink.attr('rel', 'noopener noreferrer')
+        if (service.name === 'info') {
+          $shareLink.attr('rel', 'noopener noreferrer')
+        } else {
+          $shareLink.attr('rel', 'nofollow noopener noreferrer')
+        }
+      } else if (service.name !== 'info') {
+        $shareLink.attr('rel', 'nofollow')
       }
       $shareLink.attr('title', this.getLocalized(service, 'title'))
 

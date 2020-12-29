@@ -7,6 +7,7 @@ module.exports = function(shariff) {
     popup: true,
     shareText: {
       'bg': 'cподеляне',
+      'cs': 'sdílet',
       'da': 'del',
       'de': 'teilen',
       'en': 'share',
@@ -32,9 +33,11 @@ module.exports = function(shariff) {
       'zh': '分享'
     },
     name: 'tumblr',
+    faPrefix: 'fab',
     faName: 'fa-tumblr',
     title: {
       'bg': 'Сподели в tumblr',
+      'cs': 'Sdílet na tumblru',
       'da': 'Del på tumblr',
       'de': 'Bei tumblr teilen',
       'en': 'Share on tumblr',

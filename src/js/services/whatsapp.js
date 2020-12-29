@@ -9,6 +9,7 @@ module.exports = function(shariff) {
     popup: false,
     shareText: {
       'bg': 'cподеляне',
+      'cs': 'sdílet',
       'da': 'del',
       'de': 'teilen',
       'en': 'share',
@@ -34,9 +35,11 @@ module.exports = function(shariff) {
       'zh': '分享'
     },
     name: 'whatsapp',
+    faPrefix: 'fab',
     faName: 'fa-whatsapp',
     title: {
       'bg': 'Сподели в Whatsapp',
+      'cs': 'Sdílet na Whatsappu',
       'da': 'Del på Whatsapp',
       'de': 'Bei Whatsapp teilen',
       'en': 'Share on Whatsapp',
